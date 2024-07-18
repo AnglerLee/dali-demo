@@ -1,0 +1,36 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "build-sample",
+            "type": "shell",
+            "command": ". ~/Tizen/DALi/setenv && cmake -DCMAKE_INSTALL_PREFIX=${DESKTOP_PREFIX} -DBUILD_EXAMPLE_NAME=${input:selectedFolderName}",
+            "options": {
+                "cwd": "${workspaceRoot}/build/tizen"
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "build-sample-install",
+            "type": "shell",
+            "command": "make install -j8",
+            "options": {
+                "cwd": "${workspaceRoot}/build/tizen"
+            },
+            "dependsOn": "build-sample",
+            "problemMatcher": [],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        }
+    ],
+    "inputs": [
+        {
+            "id": "selectedFolderName",
+            "description": "Selected Folder Name",
+            "type": "promptString",
+            "default": "angler"
+        }
+    ]
+}
